@@ -19,3 +19,22 @@ class Config(object):
     SESSION_REDIS = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT)  # 使用 redis 的实例
     PERMANENT_SESSION_LIFETIME = 86400  # session 的有效期，单位是秒
 
+class DevelopmentConfig(Config):
+    DEBUG = True
+
+
+class ProductionConfig(Config):
+    DEBUG = False
+
+
+class TestingConfig(Config):
+    """单元测试环境下的配置"""
+    DEBUG = True
+    TESTING = True
+
+
+config = {
+    "development": DevelopmentConfig,
+    "production": ProductionConfig,
+    "testing": TestingConfig
+}
